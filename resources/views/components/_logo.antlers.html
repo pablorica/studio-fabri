@@ -5,14 +5,58 @@
 
 <!-- /components/_logo.antlers.html -->
 <a
-    aria-label="{{ trans:strings.home }}"
+    class="p-2 -m-2 focus:outline-none focus-visible:ring-2 ring-primary text-white z-20 relative"
+    aria-label="Logo {{ config:app:name }}"
     href="{{ site:url }}"
+    title="{{ config:app:name }}"
 >
-    <img src="/visuals/statamic-peak-logo.svg"
-        class="select-none {{ class }}"
-        width="{{ width }}"
-        alt=""
-        aria-hidden="true"/>
-
+    <svg 
+        x-data="{ logoBlack: true }"
+        @change-logocolor.window="logoBlack=$event.detail.logoblack"
+        width="30" 
+        height="14" 
+        viewBox="0 0 30 14" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+        alt="{{ config:app:name }}"
+        x-bind:class="
+        logoBlack
+            ? 'fill-black'
+            : 'fill-white'
+        "  
+    >
+        <path 
+            d="M0 0V2.7061H5.6717V14H8.3778V2.7061H14.0488V0H0Z" 
+            x-bind:fill="
+            logoBlack
+                ? 'black'
+                : 'white'
+            "
+        />
+        <mask 
+            id="mask0_713_2083" 
+            style="mask-type:luminance" 
+            maskUnits="userSpaceOnUse" 
+            x="0" 
+            y="0" 
+            width="30" 
+            height="14"
+        >
+            <path 
+                d="M29.9321 0H0V14H29.9321V0Z" 
+                fill="white"
+            />
+        </mask>
+        <g mask="url(#mask0_713_2083)">
+            <path 
+                d="M27.2262 0L22.9076 5.14668L18.5889 0H15.8828V13.9992H18.5889V4.20915L22.9076 9.35658L27.2262 4.20915V13.9992H29.9323V0H27.2262Z" 
+                x-bind:fill="
+                logoBlack
+                    ? 'black'
+                    : 'white'
+                "
+            />
+        </g>
+    </svg>
 </a>
 <!-- End: /components/_logo.antlers.html -->

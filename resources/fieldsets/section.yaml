@@ -1,22 +1,81 @@
 title: Section
 fields:
   -
+    handle: top_border
+    field:
+      default: false
+      type: toggle
+      display: 'Top Border'
+      icon: toggle
+      width: 33
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+  -
     handle: slug
     field:
       input_type: text
       antlers: false
       type: text
       display: Slug
+      icon: text
       instructions: 'Use this field to apply a unique ID to this section to be used with jump links'
       listable: hidden
       instructions_position: above
       visibility: visible
       hide_display: false
-      width: 33
+      width: 66
+  -
+    handle: remove_columns_gap
+    field:
+      default: false
+      type: toggle
+      display: 'Remove columns gap'
+      icon: toggle
+      width: 25
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+  -
+    handle: screen_minimum_height
+    field:
+      default: false
+      type: toggle
+      display: 'Screen minimum height'
+      icon: toggle
+      width: 25
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+  -
+    handle: hide_viewports
+    field:
+      options:
+        mobile: null
+        tablet: null
+        desktop: null
+      taggable: false
+      push_tags: false
+      multiple: true
+      clearable: true
+      searchable: true
+      cast_booleans: false
+      type: select
+      display: 'Hide Viewports'
+      icon: select
+      width: 50
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
   -
     handle: columns
     field:
-      collapse: true
+      collapse: false
       previews: true
       fullscreen: true
       sets:
@@ -43,23 +102,27 @@ fields:
                     taggable: false
                     push_tags: false
                     multiple: true
-                    clearable: true
+                    clearable: false
                     searchable: true
                     cast_booleans: false
                     type: select
                     display: 'Hide Viewports'
+                    icon: select
                     listable: hidden
                     instructions_position: above
                     visibility: visible
+                    replicator_preview: true
                     hide_display: false
                 -
                   handle: desktop_settings
                   field:
                     type: tab
                     display: 'Desktop Settings'
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="M253.75 166.28L231.46 92a13.91 13.91 0 0 0-13.41-10H208a6 6 0 0 0 0 12h10.05a2 2 0 0 1 1.95 1.42L240 162h-35.54l-21-70a13.91 13.91 0 0 0-13.41-10H160a6 6 0 0 0 0 12h10.05a2 2 0 0 1 1.95 1.42L192 162h-35.54l-21-70a13.91 13.91 0 0 0-13.41-10H38a13.91 13.91 0 0 0-13.46 10L2.28 166.2v.2a2.79 2.79 0 0 0-.1.39a.11.11 0 0 0 0 .05A6 6 0 0 0 8 174h240a6 6 0 0 0 5.75-7.72ZM36 95.42A2 2 0 0 1 38 94h84.1a2 2 0 0 1 1.9 1.43L144 162H16.06Z"></path></svg>'
                     listable: hidden
                     instructions_position: above
                     visibility: visible
+                    replicator_preview: true
                     hide_display: false
                 -
                   handle: size
@@ -69,19 +132,27 @@ fields:
                     step: 1
                     type: range
                     display: Size
+                    icon: range
                     listable: hidden
                     instructions_position: above
                     visibility: visible
                     hide_display: false
+                    width: 50
                     replicator_preview: true
-                    default: 12
+                    default: 6
+                -
+                  handle: vertical_alignment
+                  field: common.vertical_alignment
+                  config:
+                    width: 50
                 -
                   handle: set_horizontal_position
                   field:
                     default: false
                     type: toggle
                     display: 'Set Horizontal Position'
-                    width: 33
+                    icon: toggle
+                    width: 50
                     listable: hidden
                     instructions_position: above
                     visibility: visible
@@ -91,26 +162,28 @@ fields:
                   handle: horizontal_position
                   field:
                     min: 0
-                    max: 13
+                    max: 12
                     step: 1
                     type: range
                     display: 'Horizontal Position'
-                    width: 50
+                    icon: range
+                    width: 33
                     listable: hidden
                     instructions_position: above
                     visibility: visible
                     hide_display: false
                     if:
                       set_horizontal_position: 'equals true'
-                    instructions: 'The column will move to the right n positions. 13 means the column will be placed on the right boundary of the grid.'
+                    instructions: 'The column will be shifted to the right n positions.'
                 -
                   handle: set_span_rows
                   field:
                     default: false
                     type: toggle
                     display: 'Set span rows'
+                    icon: toggle
                     instructions: 'Activate this item if you want the column to span more than one row'
-                    width: 33
+                    width: 50
                     listable: hidden
                     instructions_position: above
                     visibility: visible
@@ -124,8 +197,9 @@ fields:
                     default: 0
                     type: range
                     display: 'Span rows'
+                    icon: range
                     instructions: 'Use this utility to make the column span n rows.'
-                    width: 50
+                    width: 33
                     listable: hidden
                     instructions_position: above
                     visibility: visible
@@ -133,45 +207,36 @@ fields:
                     if:
                       set_span_rows: 'equals true'
                 -
-                  handle: vertical_alignment
-                  field: common.vertical_alignment
-                  config:
-                    width: 100
-                -
                   handle: top_padding
                   field: common.top_padding
+                  config:
+                    max: 12
                 -
                   handle: right_padding
                   field: common.right_padding
+                  config:
+                    max: 12
                 -
                   handle: bottom_padding
                   field: common.bottom_padding
+                  config:
+                    max: 12
                 -
                   handle: left_padding
                   field: common.left_padding
+                  config:
+                    max: 12
                 -
                   handle: mobile_settings
                   field:
                     type: tab
                     display: 'Mobile Settings'
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="M253.75 166.28L231.46 92a13.91 13.91 0 0 0-13.41-10H208a6 6 0 0 0 0 12h10.05a2 2 0 0 1 1.95 1.42L240 162h-35.54l-21-70a13.91 13.91 0 0 0-13.41-10H160a6 6 0 0 0 0 12h10.05a2 2 0 0 1 1.95 1.42L192 162h-35.54l-21-70a13.91 13.91 0 0 0-13.41-10H38a13.91 13.91 0 0 0-13.46 10L2.28 166.2v.2a2.79 2.79 0 0 0-.1.39a.11.11 0 0 0 0 .05A6 6 0 0 0 8 174h240a6 6 0 0 0 5.75-7.72ZM36 95.42A2 2 0 0 1 38 94h84.1a2 2 0 0 1 1.9 1.43L144 162H16.06Z"></path></svg>'
                     listable: hidden
                     instructions_position: above
                     visibility: visible
-                    hide_display: false
-                -
-                  handle: size_mobile
-                  field:
-                    min: 0
-                    max: 6
-                    step: 1
-                    type: range
-                    display: Size
-                    listable: hidden
-                    instructions_position: above
-                    visibility: visible
-                    hide_display: false
                     replicator_preview: true
-                    default: 6
+                    hide_display: false
                 -
                   handle: mobile_top_padding
                   field: common.top_padding
@@ -181,367 +246,17 @@ fields:
                 -
                   handle: mobile_bottom_padding
                   field: common.bottom_padding
-                  config:
-                    display: 'Bottom Padding'
                 -
                   handle: mobile_left_padding
                   field: common.left_padding
-                -
-                  handle: mobile_horizontal_position
-                  field:
-                    min: 0
-                    max: 7
-                    step: 1
-                    type: range
-                    display: 'Mobile Horizontal Position'
-                    instructions: 'By default, the desktop horizontal position does not apply to the mobile viewport. You can select a position here if you want the column to shift to the right also in the mobile version.'
-                    width: 33
-                    listable: hidden
-                    instructions_position: above
-                    visibility: visible
-                    hide_display: false
-                    if:
-                      set_horizontal_position: 'equals true'
-                    default: 0
-                    replicator_preview: true
-                -
-                  handle: tablet_settings
-                  field:
-                    type: tab
-                    display: 'Tablet Settings'
-                    listable: hidden
-                    instructions_position: above
-                    visibility: visible
-                    hide_display: false
-                    replicator_preview: true
-                -
-                  handle: tablet_size
-                  field:
-                    min: 0
-                    max: 12
-                    step: 1
-                    type: range
-                    display: Size
-                    listable: hidden
-                    instructions_position: above
-                    visibility: visible
-                    hide_display: false
-                    replicator_preview: true
-                    default: 12
-                -
-                  handle: tablet_horizontal_position
-                  field:
-                    min: 0
-                    max: 13
-                    step: 1
-                    type: range
-                    display: 'Tablet Horizontal Position'
-                    instructions: 'By default, the desktop horizontal position applies to the tablet viewport. You can select a position here if you want the column to have a different position in the tablet version.'
-                    width: 33
-                    listable: hidden
-                    instructions_position: above
-                    visibility: visible
-                    hide_display: false
-                    if:
-                      set_horizontal_position: 'equals true'
-                    default: 0
-                    replicator_preview: true
       type: replicator
       display: Columns
+      icon: replicator
       listable: hidden
       instructions_position: above
       visibility: visible
       hide_display: false
       replicator_preview: true
-  -
-    handle: navigation
-    field:
-      type: tab
-      display: Navigation
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: navigation_colour
-    field:
-      options:
-        white: null
-        grey: null
-      taggable: false
-      push_tags: false
-      multiple: false
-      clearable: false
-      searchable: true
-      cast_booleans: false
-      type: select
-      display: 'Navigation colour'
-      instructions: 'The colour of the navigation buttons will change according to the background of the section when they are over it. However, you can force this colour by selecting it here.'
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: link
-    field:
-      type: tab
-      display: Link
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: section_link
-    field:
-      type: link
-      display: 'Section link'
-      instructions: 'If this section is linked to an internal or external element, select the URL here.'
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: background
-    field:
-      type: tab
-      display: Background
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: bg_image
-    field: common.image
-    config:
-      display: 'Background Image'
-      width: 50
-  -
-    handle: bg_video_url
-    field:
-      placeholder: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-      type: video
-      display: 'Background Video'
-      instructions: 'YouTube or Vimeo URL.'
-      width: 50
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: background_colour_type
-    field:
-      options:
-        transparent: null
-        custom: null
-        taxonomy: null
-      default: custom
-      type: button_group
-      display: 'Background Colour'
-      width: 50
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: background_colour
-    field: common.colour
-    config:
-      swatches:
-        - white
-        - yellow
-        - pink
-        - orange
-        - green
-        - lightblue
-        - blue
-        - darkblue
-        - grey
-        - black
-      display: 'Background Custom Colour'
-      width: 50
-      default: white
-      if:
-        background_colour_type: 'equals custom'
-  -
-    handle: text_colour_type
-    field:
-      options:
-        default: null
-        taxonomy: null
-        custom: null
-      default: custom
-      type: button_group
-      display: 'Text Colour'
-      width: 50
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: text_colour
-    field: common.colour
-    config:
-      display: 'Text Custom Colour'
-      width: 50
-      default: black
-      if:
-        text_colour_type: 'equals custom'
-  -
-    handle: structure
-    field:
-      type: tab
-      display: Structure
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: section_over_floating_logo
-    field:
-      default: false
-      type: toggle
-      display: 'Show section over floating logo'
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: loading_effect
-    field:
-      default: true
-      type: toggle
-      display: 'Loading effect'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: top_border
-    field:
-      default: false
-      type: toggle
-      display: 'Top Border'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: remove_columns_gap
-    field:
-      default: false
-      type: toggle
-      display: 'Remove columns gap'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: screen_minimum_height
-    field:
-      default: false
-      type: toggle
-      display: 'Screen minimum height'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: display_scrolldown_button
-    field:
-      default: false
-      type: toggle
-      display: 'Display the scroll-down button'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: scroll_down_button_link
-    field:
-      input_type: text
-      antlers: false
-      type: text
-      display: 'scroll-down Button Link'
-      instructions: 'If empty, the page will scroll down the same height as the device screen'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      replicator_preview: true
-      hide_display: false
-      if:
-        display_scrolldown_button: 'equals true'
-  -
-    handle: collapse
-    field:
-      type: tab
-      display: Collapse
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: section_collapsable
-    field:
-      default: false
-      type: toggle
-      display: 'Collapsable Section'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: section_collapsable_title
-    field: collapse.collapse_title
-    config:
-      display: 'Collapse Title'
-      if:
-        section_collapsable: 'equals true'
-      width: 66
-  -
-    handle: collapse_colour
-    field: collapse.collapse_colour
-    config:
-      display: 'Collapse Title Colour'
-      width: 33
-      if:
-        section_collapsable: 'equals true'
-  -
-    handle: collapse_remove_hover_effect
-    field:
-      default: false
-      type: toggle
-      display: 'No reverse colours on hover'
-      width: 33
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-      if:
-        section_collapsable: 'equals true'
-  -
-    handle: collapse_text_size
-    field: collapse.collapse_text_size
-    config:
-      display: 'Collapse Title Text size'
-      width: 33
-      if:
-        section_collapsable: 'equals true'
-  -
-    handle: padding
-    field:
-      type: tab
-      display: Padding
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
   -
     handle: top_padding
     field: common.top_padding
@@ -554,31 +269,3 @@ fields:
   -
     handle: left_padding
     field: common.left_padding
-  -
-    handle: viewports
-    field:
-      type: tab
-      display: Viewports
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
-    handle: hide_viewports
-    field:
-      options:
-        mobile: null
-        tablet: null
-        desktop: null
-      taggable: false
-      push_tags: false
-      multiple: true
-      clearable: true
-      searchable: true
-      cast_booleans: false
-      type: select
-      display: 'Hide Viewports'
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false

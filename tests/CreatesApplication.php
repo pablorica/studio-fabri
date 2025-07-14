@@ -3,14 +3,16 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Hash;
 
 trait CreatesApplication
 {
     /**
      * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
      */
-    public function createApplication(): Application
+    public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
 

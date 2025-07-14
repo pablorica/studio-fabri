@@ -9,16 +9,23 @@ return [
     |
     | Whether the API should be enabled, and through what route. You
     | can enable or disable the whole API, and expose individual
-    | resources per environment, depending on your site needs.
+    | resources per environent, depending on your site needs.
     |
     | https://statamic.dev/content-api#enable-the-api
     |
     */
 
-    'enabled' => env('STATAMIC_API_ENABLED', false),
+    //'enabled' => env('STATAMIC_API_ENABLED', false),
+    'enabled' => true,
 
     'resources' => [
-        'collections' => false,
+        //'collections' => true,
+        'collections' => [
+            'news' => true,
+            'projects' => [
+                'allowed_filters' => ['title', 'sectors', 'disciplines'],
+            ],
+        ],
         'navs' => false,
         'taxonomies' => false,
         'assets' => false,
@@ -68,20 +75,6 @@ return [
 
     'cache' => [
         'expiry' => 60,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Exclude Keys
-    |--------------------------------------------------------------------------
-    |
-    | Here you may provide an array of keys to be excluded from API responses.
-    | For example, you may want to hide things like edit_url, api_url, etc.
-    |
-    */
-
-    'excluded_keys' => [
-        //
     ],
 
 ];

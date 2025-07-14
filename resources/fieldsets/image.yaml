@@ -4,10 +4,15 @@ fields:
     handle: image
     field: common.image
     config:
-      width: 50
+      width: 100
   -
     handle: size
     field: common.size
+    config:
+      width: 50
+  -
+    handle: orientation
+    field: common.orientation
     config:
       width: 50
   -
@@ -18,3 +23,13 @@ fields:
       localizable: true
       listable: hidden
       display: Caption
+  -
+    handle: image_link
+    field:
+      type: link
+      display: 'Image Link'
+      icon: link
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false

@@ -1,115 +1,18 @@
-@import "tailwindcss";
-@import "./peak.css";
-@import "./typography.css";
+@import "tailwindcss/base";
 
-@config '../js/tailwind.site.js';
+@import "custom";
+@import "components/header";
+@import "components/footer";
+@import "components/home";
+@import "components/work";
 
-@theme {
-    /* Colors */
+@import "utilities/expanded_line";
+@import "utilities/expanse";
+@import "utilities/card";
+@import "utilities/link_columns";
+@import "utilities/videos";
 
-    --color-black:     #000;
-    --color-blue:      #00B2E3;
-    --color-darkblue:  #005CB9;
-    --color-green:     #00945E;
-    --color-grey:      #C8C8C8;
-    --color-darkgrey:  #898A8D;
-    --color-orange:    #FF5F39;
-    --color-red:       #D51C59;
-    --color-yellow:    #FFCD00;
-    --color-white:     #fff;
-    --color-sand:      #E8E1D6;
-    --color-beige:     #D9C2B6;
-    --color-lightbeige:#D9C2B680;
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-    /* If Bard Text Color add-on is installed, do not forget to update config/bard-custom-colors.php */
-
-    --color-primary: oklch(53.24% 0.301 290.86);
-
-    --color-neutral: var(--color-slate-800);
-    --color-neutral-50: var(--color-slate-50);
-    --color-neutral-100: var(--color-slate-100);
-    --color-neutral-200: var(--color-slate-200);
-    --color-neutral-300: var(--color-slate-300);
-    --color-neutral-400: var(--color-slate-400);
-    --color-neutral-500: var(--color-slate-500);
-    --color-neutral-600: var(--color-slate-600);
-    --color-neutral-700: var(--color-slate-700);
-    --color-neutral-800: var(--color-slate-800);
-    --color-neutral-900: var(--color-slate-900);
-    --color-neutral-950: var(--color-slate-950);
-
-    /* --font-sans: Gaultier, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
-    --font-sans: 'Futura Now Text', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    /* --font-serif: Lavigne, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
-    /* --font-mono: Anonymous, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
-
-    --font-weight-*: initial;
-    /* --font-weight-hairline: 100; */
-    /* --font-weight-thin: 200; */
-    /* --font-weight-light: 300; */
-    --font-weight-normal: 400;
-    /* --font-weight-medium: 500; */
-    /* --font-weight-semibold: 600; */
-    --font-weight-bold: 700;
-    /* --font-weight-extrabold: 800; */
-    /* --font-weight-black: 900; */
-
-    /* Font Size */
-    --text-xs: 0.6rem; /* 12px */
-    --text-sm: 0.7rem; /* 14px */
-    --text-md: 0.8rem; /* 16px */
-    --text-base: 1rem; /* 20px */
-    --text-xl: 1.3rem; /* 26px */
-    --text-2xl: 1.6rem; /* 32px */
-    --text-3xl: 2rem; /* 40px */
-    --text-4xl: 2.5rem; /* 50px */
-    --text-5xl: 3.2rem; /* 64px */
-    --text-6xl: 4rem; /* 80px */
-    --text-7xl: 5rem; /* 100px */
-
-    /* Font Weight */
-    /* --font-bold: 700; */
-
-    /* Letter Spacing */
-    --tracking-tighter: -0.1rem;
-    --tracking-tight: -0.05rem;
-    --tracking-normal: -0.02rem;
-    --tracking-none: 0;
-
-    /* Line Height */
-    --leading-normal: 1.125;
-
-    /* Animation */
-    --animate-appearsin: appearsIn 1.2s ease forwards;
-    --animate-appearsout: appearsOut 0.6s ease forwards;
-    @keyframes appearsIn {
-        0% {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    @keyframes appearsOut {
-        0% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        100% {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-    }
-}
-
-@layer base {
-    html {
-        color: var(--color-neutral);
-        /* Set sans, serif or mono stack with optional custom font as default. */
-        font-family: var(--font-sans);
-        /* font-family: var(--font-serif); */
-        /* font-family: var(--font-mono); */
-    }
-}
+@import "libraries/pswp";
