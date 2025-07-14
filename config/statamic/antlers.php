@@ -4,16 +4,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Debugbar
+    | Version
     |--------------------------------------------------------------------------
     |
-    | Here you may specify whether the Antlers profiler should be added
-    | to the Laravel Debugbar. This is incredibly useful for finding
-    | performance impacts within any of your Antlers templates.
+    | The desired Antlers language version to utilize. Possibly values are:
+    |   - regex: Utilize pre-3.3 Antlers. Appropriate for existing sites.
+    |   - runtime: Utilizes >= 3.3 Antlers, recommended for new sites.
     |
     */
 
-    'debugbar' => env('STATAMIC_ANTLERS_DEBUGBAR', true),
+    'version' => 'runtime',
 
     /*
     |--------------------------------------------------------------------------

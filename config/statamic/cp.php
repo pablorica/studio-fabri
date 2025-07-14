@@ -17,21 +17,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication
-    |--------------------------------------------------------------------------
-    |
-    | Whether the Control Panel's authentication pages should be enabled,
-    | and where users should be redirected in order to authenticate.
-    |
-    */
-
-    'auth' => [
-        'enabled' => true,
-        'redirect_to' => null,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Start Page
     |--------------------------------------------------------------------------
     |
@@ -56,20 +41,32 @@ return [
         [
             'type' => 'images_missing_alt',
             'container' => 'images',
+            'filetypes' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'bmp', 'tiff', 'svg'],
             'limit' => 5,
-            'width' => 50,
+            'expiry' => 0,
+            'width' => 50
         ],
         [
             'type' => 'collection',
             'collection' => 'pages',
-            'width' => 50,
+            'width' => 50
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'projects',
+            'width' => 50
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'news',
+            'width' => 50
         ],
         [
             'type' => 'form',
             'form' => 'contact',
             'fields' => ['name', 'email'],
             'limit' => '5',
-            'width' => 100,
+            'width' => 100
         ],
     ],
 
@@ -121,7 +118,7 @@ return [
 
     'support_url' => env('STATAMIC_SUPPORT_URL', 'https://statamic.com/support'),
 
-    /*
+     /*
     |--------------------------------------------------------------------------
     | Login Theme
     |--------------------------------------------------------------------------
@@ -148,23 +145,11 @@ return [
 
     'custom_logo_url' => [
         'nav' => env('STATAMIC_CUSTOM_LOGO_NAV_URL', null),
-        'outside' => env('STATAMIC_CUSTOM_LOGO_OUTSIDE_URL', null),
+        'outside' => env('STATAMIC_CUSTOM_LOGO_OUTSIDE_URL', null)
     ],
 
     'custom_favicon_url' => env('STATAMIC_CUSTOM_FAVICON_URL', null),
 
     'custom_css_url' => env('STATAMIC_CUSTOM_CSS_URL', null),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Thumbnails
-    |--------------------------------------------------------------------------
-    |
-    | Here you may define additional CP asset thumbnail presets.
-    |
-    */
-
-    'thumbnail_presets' => [
-        // 'medium' => 800,
-    ],
 ];

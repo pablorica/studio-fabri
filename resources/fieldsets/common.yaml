@@ -157,31 +157,9 @@ fields:
       visibility: visible
       hide_display: false
   -
-    handle: colour
-    field:
-      swatches:
-        - white
-        - yellow
-        - pink
-        - orange
-        - green
-        - lightblue
-        - blue
-        - darkblue
-        - grey
-        - black
-      allow_any: false
-      type: color
-      display: Colour
-      icon: color
-      listable: hidden
-      instructions_position: above
-      visibility: visible
-      hide_display: false
-  -
     handle: top_padding
     field:
-      min: -1
+      min: 0
       max: 10
       step: 1
       type: range
@@ -192,11 +170,11 @@ fields:
       instructions_position: above
       visibility: visible
       hide_display: false
-      default: -1
+      default: 0
   -
     handle: right_padding
     field:
-      min: -1
+      min: 0
       max: 10
       step: 1
       type: range
@@ -207,11 +185,11 @@ fields:
       instructions_position: above
       visibility: visible
       hide_display: false
-      default: -1
+      default: 0
   -
     handle: bottom_padding
     field:
-      min: -1
+      min: 0
       max: 10
       step: 1
       type: range
@@ -222,11 +200,11 @@ fields:
       instructions_position: above
       visibility: visible
       hide_display: false
-      default: -1
+      default: 0
   -
     handle: left_padding
     field:
-      min: -1
+      min: 0
       max: 10
       step: 1
       type: range
@@ -237,4 +215,4 @@ fields:
       instructions_position: above
       visibility: visible
       hide_display: false
-      default: -1
+      default: 0

@@ -1,25 +1,49 @@
 {{#
     @name Projects index
     @desc The Projects index template.
+    @see https://statamic.com/addons/jonassiewertsen/livewire
 #}}
 
 <!-- /projects/index.antlers.html -->
-<main class="outer-grid" id="content">
-    <div class="fluid-container grid md:grid-cols-12 gap-8">
-        {{ partial:typography/h1 :content="title" class="md:col-span-12" }}
-        {{ collection:projects sort="date:desc" paginate="true" limit="12" as="items" }}
-            {{ unless no_results }}
-                {{ items }}
-                    {{ partial:components/projects_item class="md:col-span-4" }}
-                {{ /items }}
-            {{ else }}
-                <div class="md:col-span-6">
-                    {{ trans:strings.no_results }}
-                </div>
-            {{ /unless }}
-
-            {{ partial:statamic-peak-tools::components/pagination class="md:col-span-12" }}
-        {{ /collection:projects }}
+{{ livewire:styles }}
+<main x-data="{ closed_nav: true }"
+    id="content"
+    class="outer-grid" 
+    @opened-nav.window="closed_nav=$event.detail.isclosed;"
+>
+    <div class="fluid-container grid gap-2 md:grid-cols-12">
+        <header :class="{ 'opacity-0': !closed_nav }"
+            class="md:col-span-4
+            md:col-start-9 
+        ">
+            {{ partial:typography/h1 
+                :content="title" 
+                class="w-full
+                pl-[50%] md:pl-0
+                text-left
+                mt-[15px] md:mt-[10px]" 
+            }}
+        </header>
     </div>
+
+    {{ page_builder scope="block" }}
+        {{ partial src="page_builder/{type}" }}
+    {{ /page_builder }}
+
+
+
+        {{ section:index_content }}
+
+
+                {{ livewire:projects.show-projects  
+                    lazy="true" 
+                    :sortoptions="sort_options.value"
+                    :stickyelement="sticky_element.id"
+                }}
+            
+        {{ /section:index_content }}
+
+    
 </main>
+{{ livewire:scripts }}
 <!-- End: /projects/index.antlers.html -->

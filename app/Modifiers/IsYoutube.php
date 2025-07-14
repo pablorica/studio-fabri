@@ -3,7 +3,6 @@
 namespace App\Modifiers;
 
 use Statamic\Modifiers\Modifier;
-use Illuminate\Support\Arr; // Laravel 6.x and up
 
 class IsYoutube extends Modifier
 {
@@ -15,7 +14,7 @@ class IsYoutube extends Modifier
      * @return bool
      */
     public function index(
-        $value ,
+        $value , 
         $params
     ) {
         $is_youtube = false;
@@ -27,31 +26,23 @@ class IsYoutube extends Modifier
             $is_youtube = true;
         }
 
-        //$param = array_get($params, 0)
-        $param  = Arr::get($params, 0, null); // Replace array_get with Arr::get
-        if ($param !== null) {
-            if( $param == 'id'
+        if ($param = array_get($params, 0)) {
+            if( $param == 'id' 
                 && $is_youtube
             ) {
+                $youtubeid = explode('v=', $value);
+                $youtubeid = $youtubeid[1];
+                $youtubeid = explode('?', $youtubeid);
+                $youtubeid = $youtubeid[0];
+                $youtubeid = explode('&', $youtubeid);
+                $youtubeid = $youtubeid[0];
 
-              $youtubeid = null;
-
-              if (preg_match('/(?:v=|shorts\/)([a-zA-Z0-9_-]{11})/',$value, $matches)) {
-                $youtubeid =$matches[1];
-              }
-
-              if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $value, $matches)) {
-                $youtubeid =$matches[1];
-              }
-
-              //Log::info("youtubeid: ". print_r($youtubeid,true));
-
-              return $youtubeid;
+                return $youtubeid;
             }
         }
+        
 
-
-
+        
         return $is_youtube;
     }
 }
