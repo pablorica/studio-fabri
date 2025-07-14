@@ -18,6 +18,7 @@ module.exports = {
     colors: {
       black:   '#000',
       white:  '#fff',
+      salmon: '#f16e62', //#757575, #A7A7A7
       gray: '#999', //#757575, #A7A7A7
       // Neutrals: neutral colors, with a default fallback if you don't need shades. Always set a DEFAULT when you use shades.
       neutral: {
@@ -27,6 +28,9 @@ module.exports = {
       // Primary: primary brand color with a default fallback if you don't need shades. Always set a DEFAULT when you use shades.
       primary: {
         DEFAULT: '#999', //#757575, #A7A7A7
+      },
+      secondary: {
+        DEFAULT: 'rgba(255,255,255,0.5)',
       },
     },
     extend: {
@@ -73,21 +77,21 @@ module.exports = {
       // that is actual animation
       keyframes: theme => ({
         appearsIn: {
-            '0%': { 
+            '0%': {
               opacity: 0,
               transform: 'translateY(40px)',
               },
-            '100%': { 
+            '100%': {
               opacity: 1,
               transform: 'translateY(0)',
             },
         },
         appearsOut: {
-            '0%': { 
+            '0%': {
                 opacity: 1,
-                transform: 'translateY(0)',  
+                transform: 'translateY(0)',
             },
-            '100%': { 
+            '100%': {
                 opacity: 0,
                 transform: 'translateY(40px)',
             },
@@ -129,92 +133,92 @@ module.exports = {
             }
         },
         fadeIn: {
-          '0%': { 
+          '0%': {
             opacity: 0,
             scale: 0,
             },
-          '100%': { 
+          '100%': {
             opacity: 1,
             scale: 1,
           },
         },
         fadeOut: {
-            '0%': { 
+            '0%': {
               opacity: 1,
               scale: 1,
               },
-            '100%': { 
+            '100%': {
               opacity: 0,
               scale: 0,
             },
         },
         moveUp: {
-            '0%': { 
+            '0%': {
                 top: 'calc(100% - 30rem)',
                 backgroundColor: 'black',
               },
-            '100%': { 
+            '100%': {
                 top: 0, // '6.61rem'
                 backgroundColor: 'white',
             },
         },
         moveLittleUp: {
-            '0%': { 
+            '0%': {
                 top: '100%',
               },
-            '100%': { 
+            '100%': {
                 top: 'calc(100% - 30rem)',
             },
         },
         moveLittleDown: {
-            '0%': { 
+            '0%': {
                 top: 'calc(100% - 30rem)',
               },
-            '100%': { 
+            '100%': {
                 top: '100%',
             },
         },
         changeColour: {
-            '0%': { 
+            '0%': {
                 color: 'white',
                 stroke: 'white',
                 borderColor: 'white',
               },
-            '100%': { 
+            '100%': {
                 color: 'black',
                 stroke: 'black',
                 borderColor: 'black',
             },
         },
         changeOpacity: {
-            '0%': { 
+            '0%': {
                 opacity: 0,
             },
-            '100%': { 
+            '100%': {
                 opacity: 0.5,
             },
         },
         menuIn: {
-            '0%': { 
+            '0%': {
                 opacity: 0,
                 zIndex: 10,
             },
-            '100%': { 
+            '100%': {
               opacity: 1,
             },
         },
         menuOut: {
-              '0%': { 
+              '0%': {
                 visibility: 'visible',
                 opacity: 1,
                 },
-              '100%': { 
+              '100%': {
                 visibility: 'hidden',
                 opacity: 0,
                 zIndex: -10,
               },
         },
-        
+
       }),
 
       height: {
@@ -254,7 +258,7 @@ module.exports = {
       sans: [
         // Use a custom sans serif font for this site by changing 'Gaultier' to the
         // font name you want and uncommenting the following line.
-        'Theinhardt',
+        'CircularStd',
         ...defaultTheme.fontFamily.sans,
       ],
       serif: [
@@ -277,7 +281,7 @@ module.exports = {
       // black: 900,
     },
     fontSize: {
-        xxs: '0.444rem', // 8px  
+        xxs: '0.444rem', // 8px
         xs: '0.556rem', // 10px  (old 0.5rem)
         sm: '0.889rem', // 16px (old 0.8rem)
         base: '1rem', // 18px (old 20px)
@@ -303,10 +307,10 @@ module.exports = {
         //widest: '.25em',
     },
     lineHeight: { //leading
-        nav: '0.95', // custom  
+        nav: '0.95', // custom
         none: '1',
-        compact: '1.1', // custom  
-        tight: '1.15',   // old  1.25    
+        compact: '1.1', // custom
+        tight: '1.15',   // old  1.25
     },
     typography: {
         DEFAULT: { // this is for prose class
@@ -333,12 +337,12 @@ module.exports = {
                 },
             },
         },
-        xl: { // and this is for prose-xl. 
+        xl: { // and this is for prose-xl.
             css: {
                 h1: {
                     fontSize: '5.25rem', // 105px (base 20px)
                     letterSpacing: '-2px',
-                    
+
                 },
                 h2: {
                     fontSize: '5.25rem', // 105px (base 20px)
@@ -358,7 +362,7 @@ module.exports = {
             // Fluid typography from 1 rem to 1.2 rem with fallback to 20px.
             //'font-size': 'clamp(1rem, 20px, 1.2rem)',
             fontSize: '18px',
-            
+
             // Safari resize fix.
             minHeight: '0vw',
         },
@@ -427,7 +431,7 @@ module.exports = {
 
     // Custom variants for this particular site.
     plugin(function ({ addVariant }) {
-        addVariant('mobile-only', "@media screen and (max-width: theme('screens.sm'))"); 
+        addVariant('mobile-only', "@media screen and (max-width: theme('screens.sm'))");
         // instead of hard-coded 640px use sm breakpoint value from config. Or anything
         addVariant('tablet-only', "@media screen and (min-width: theme('screens.sm')) and (max-width: calc(theme('screens.xl') - 1px))");
         addVariant('mbtb-only', "@media screen and (max-width: calc(theme('screens.xl') - 1px))");

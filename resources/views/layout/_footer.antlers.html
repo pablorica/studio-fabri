@@ -6,93 +6,93 @@
 <!-- /layout/_footer.antlers.html -->
 {{ footer_class = 'border-t border-black' }}
 {{ text_color = 'text-white' }}
-{{ if is_homepage }} 
+{{ if is_homepage }}
     {{ footer_class = '' }}
     {{ text_color = 'text-black' }}
 {{ /if }}
-<footer x-data="{ shown_footer: false }" 
+<footer x-data="{ shown_footer: false }"
     id="contact"
-    
+
     x-intersect.threshold.80="
         $dispatch(
-            'change-bodycolour', 
+            'change-bodycolour',
             { bdclass: 'dark' }
-        ); 
-        $dispatch(
-            'change-logocolor' , 
-            { logoblack: false } 
         );
-        
+        $dispatch(
+            'change-logocolor' ,
+            { logoblack: false }
+        );
+
     "
     x-intersect:leave.threshold.80="
         $dispatch(
-            'change-bodycolour', 
+            'change-bodycolour',
             { bdclass: 'bright' }
-        ); 
+        );
         $dispatch(
-            'change-logocolor' , 
-            { logoblack: true } 
+            'change-logocolor' ,
+            { logoblack: true }
         );
     "
     x-intersect.once="shown_footer = true;"
     x-intersect.threshold.90="
         $dispatch(
-            'change-onfooter', 
+            'change-onfooter',
             { onfooter: true }
         );
         $dispatch(
-            'change-headernav', 
-            {   message: '', 
-                link : '' 
+            'change-headernav',
+            {   message: '',
+                link : ''
             }
         );
     "
     x-intersect:leave.threshold.90="
         $dispatch(
-            'change-onfooter', 
+            'change-onfooter',
             { onfooter: false }
         );
     "
-    :class="shown_footer ? 'visible' : ''" 
+    :class="shown_footer ? 'visible' : ''"
 
-    class="w-full 
-        fluid-container 
-        grid gap-2 
-        grid-cols-2 lg:grid-cols-12 
+    class="w-full
+        fluid-container
+        grid gap-2
+        grid-cols-2 lg:grid-cols-12
         mt-0 mb-auto
-        h-screen 
+        h-screen
         max-h-[calc(100dvh)]
-        opacity-0 
-        pt-[17px] 
-        pb-4 
+        opacity-0
+        pt-[17px]
+        pb-4
         {{ footer_class }}
     "
 >
-       
-    <div class="footer_menu 
-        flex flex-col 
-        col-span-2 
-        lg:col-span-4 lg:col-start-9 
-        h-full 
+
+    <div class="footer_menu
+        flex flex-col
+        col-span-2
+        lg:col-span-4 lg:col-start-9
+        h-full
         pt-0
         mt-[3px]
     ">
-                {{ partial:navigation/main_menu 
-                    link_color="text-white group-hover:text-primary hover:!text-white"
+                {{ partial:navigation/main_menu
+                    link_color="text-white group-hover:text-secondary hover:!text-white"
                  }}
 
                  <div class="footer-blurb
-                    w-full 
-                    pt-[75px] xl:pl-[7px]  
-                    flex 
+                    w-full
+                    pt-[75px] xl:pl-[7px]
+                    flex
                     mt-auto md:mt-0
                     mb-[25px] md:mb-auto
                     {{# mb-auto mt-0 #}}
                 ">
-                    <div class="left-column 
+                    <div class="left-column
                         w-1/2
-                        pb-4 md:pb-0 
-                        pr-4 md:pr-14 
+                        pb-4 md:pb-0
+                        pr-4 md:pr-14
                     ">
                         {{ if particular_footer_left_column }}
                             {{ particular_footer_left_column }}
@@ -100,9 +100,9 @@
                             {{ footer_message:left_column }}
                         {{ /if }}
                     </div>
-                    <div class="right-column 
+                    <div class="right-column
                         w-1/2
-                        pr-4 md:pr-14 
+                        pr-4 md:pr-14
                     ">
                         {{ if particular_footer_left_column }}
                             {{ particular_footer_right_column }}
@@ -116,7 +116,7 @@
                     <div class="contact_details flex flex-col justify-end h-full w-1/2">
                         {{ contact_details:contact_details }}
                     </div>
-    
+
                     <div class="flex flex-col justify-end h-full w-1/2">
                         {{ partial:navigation/social_media }}
                         <div class="copyright">
@@ -124,9 +124,9 @@
                         </div>
                     </div>
                 </div>
-            
+
     </div>
-    
-   
+
+
 </footer>
 <!-- End: /layout/_footer.antlers.html -->

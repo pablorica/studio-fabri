@@ -1,31 +1,31 @@
 /* If you don't want to use the JS in CSS syntax from `tailwind.config.site.js` you can add your own custom CSS here. Use different layers to make sure your CSS either get's purged or not: https://tailwindcss.com/docs/functions-and-directives#layer. CSS in the base layer won't get purged. */
 
 @layer base {
-    
 
     @font-face {
-        font-family: 'Theinhardt';
-        src: url('/resources/fonts/theinhardt/Theinhardt-Rg.eot');
-        src: url('/resources/fonts/theinhardt/Theinhardt-Rg.eot?#iefix') format('embedded-opentype'),
-            url('/resources/fonts/theinhardt/Theinhardt-Rg.woff2') format('woff2'),
-            url('/resources/fonts/theinhardt/Theinhardt-Rg.woff') format('woff'),
-            url('/resources/fonts/theinhardt/Theinhardt-Rg.svg#Theinhardt-Rg') format('svg');
+        font-family: 'CircularStd';
+        src: url('/resources/fonts/CircularStd/CircularStd-Book.eot');
+        src: url('/resources/fonts/CircularStd/CircularStd-Book.eot?#iefix') format('embedded-opentype'),
+            url('/resources/fonts/CircularStd/CircularStd-Book.woff2') format('woff2'),
+            url('/resources/fonts/CircularStd/CircularStd-Book.woff') format('woff'),
+            url('/resources/fonts/CircularStd/CircularStd-Book.svg#CircularStd-Book') format('svg');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
     }
 
     @font-face {
-        font-family: 'Theinhardt';
-        src: url('/resources/fonts/theinhardt/Theinhardt-Md.eot');
-        src: url('/resources/fonts/theinhardt/Theinhardt-Md.eot?#iefix') format('embedded-opentype'),
-            url('/resources/fonts/theinhardt/Theinhardt-Md.woff2') format('woff2'),
-            url('/resources/fonts/theinhardt/Theinhardt-Md.woff') format('woff'),
-            url('/resources/fonts/theinhardt/Theinhardt-Md.svg#Theinhardt-Md') format('svg');
-        font-weight: 500;
+        font-family: 'CircularStd';
+        src: url('/resources/fonts/CircularStd/CircularStd-Bold.eot');
+        src: url('/resources/fonts/CircularStd/CircularStd-Bold.eot?#iefix') format('embedded-opentype'),
+            url('/resources/fonts/CircularStd/CircularStd-Bold.woff2') format('woff2'),
+            url('/resources/fonts/CircularStd/CircularStd-Bold.woff') format('woff'),
+            url('/resources/fonts/CircularStd/CircularStd-Bold.svg#CircularStd-Bold') format('svg');
+        font-weight: bold;
         font-style: normal;
         font-display: swap;
     }
+
 
     @font-face {
         font-family: 'Aktiv Grotesk';
@@ -55,7 +55,7 @@
 
     h1, h2 {
         @apply text-4xl lg:text-6xl 2xl:text-8xl;
-        @apply font-normal;
+        @apply font-bold;
         @apply leading-none;
         @apply md:tracking-tight;
     }
@@ -109,10 +109,10 @@
     body.bright section a:not([class^='text-']) {
         @apply text-primary hover:text-black;
     }
-    
+
 
     body.dark {
-        @apply bg-black;
+        @apply bg-salmon;
         @apply text-white;
     }
     body.dark header{
@@ -126,7 +126,7 @@
         @apply stroke-white;
     }
     body.dark .home_header{
-        @apply bg-black;
+        @apply bg-salmon;
         @apply text-white;
     }
     body.dark .text-neutral,
@@ -205,5 +205,5 @@
 }
 
 @layer utilities {
-    
+
 }

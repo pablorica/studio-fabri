@@ -17,19 +17,19 @@
             $dispatch('opened-nav' , { isclosed: mobileNavOpen } );
         "
         @click.prevent.stop="
-            mobileNavOpen = !mobileNavOpen; 
+            mobileNavOpen = !mobileNavOpen;
             burgerclicked = true;
             mobileNavOpen ? setTimeout(
                         () => circle_hover_hide = true, 1000
                     )
                 : circle_hover_hide = false
             "
-        class="absolute 
-            right-0 top-0 z-20 
-            mr-4 md:mr-16 
+        class="absolute
+            right-0 top-0 z-20
+            mr-4 md:mr-16
             text-2xl font-bold text-black
-            mb-safe  
-            bg-transparent 
+            mb-safe
+            bg-transparent
             outline-none
             leading-none"
         :class="
@@ -44,12 +44,12 @@
         "
         :aria-expanded="mobileNavOpen"
     >
-        <svg version="1.1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink" 
-            x="0px" 
+        <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
             y="0px"
-            viewBox="0 0 30 30" 
+            viewBox="0 0 30 30"
             xml:space="preserve"
             class="-m-2 -mt-[7px] ease-in duration-300 w-[30px] group"
             :class="mobileNavOpen
@@ -60,7 +60,7 @@
             <g>
                 <polygon points="16,7.9 14,7.9 14,14 7.9,14 7.9,16 14,16 14,22.1 16,22.1 16,16 22.1,16 22.1,14 16,14"
                     stroke-width="0"
-                    
+
                 />
                 <path d="M15,0C6.73,0,0,6.73,0,15s6.73,15,15,15c8.27,0,15-6.73,15-15S23.27,0,15,0z M15,28C7.83,28,2,22.17,2,15S7.83,2,15,2
                 s13,5.83,13,13S22.17,28,15,28z"
@@ -72,59 +72,59 @@
                             : ''
                         : 'opacity-0 group-hover:opacity-100'
                     "
-                    
+
                 ></path>
             </g>
         </svg>
     </button>
 
     <div
-        class="fixed 
-            inset-0 
-            fluid-container 
-            gap-2 
-            grid-cols-2 lg:grid-cols-12 
-            justify-end 
-            bg-black 
-            mainmenu 
+        class="fixed
+            inset-0
+            fluid-container
+            gap-2
+            grid-cols-2 lg:grid-cols-12
+            justify-end
+            bg-salmon
+            mainmenu
             hidden
         "
         x-bind:class="
         mobileNavOpen
             ? '!grid visible'
-            : burgerclicked  
+            : burgerclicked
                 ? '!grid invisible'
                 : ''
         "
-    >   
-        <div class="flex flex-col 
-            pt-0 pb-2 
-            mt-[20px] 
-            col-span-2 
+    >
+        <div class="flex flex-col
+            pt-0 pb-2
+            mt-[20px]
+            col-span-2
             lg:col-span-4 lg:col-start-9
         ">
-            {{ partial:navigation/main_menu 
-                link_color="text-white group-hover:text-primary hover:!text-white"
+            {{ partial:navigation/main_menu
+                link_color="text-white group-hover:text-secondary hover:!text-white"
             }}
-            
+
             <div class="mainmenu-blurb
-                w-full 
-                pt-[75px] xl:pl-[7px]  
-                text-white 
-                flex 
+                w-full
+                pt-[75px] xl:pl-[7px]
+                text-white
+                flex
                 mt-auto md:mt-0
                 mb-[25px] md:mb-auto
             ">
-                <div class="left-column 
+                <div class="left-column
                     w-1/2
-                    pb-4 md:pb-0 
-                    pr-4 md:pr-14 
-                ">      
+                    pb-4 md:pb-0
+                    pr-4 md:pr-14
+                ">
                     {{ footer_message:left_column }}
                 </div>
-                <div class="right-column 
+                <div class="right-column
                     w-1/2
-                    pr-4 md:pr-14 
+                    pr-4 md:pr-14
                 ">
                     {{ footer_message:right_column }}
                 </div>

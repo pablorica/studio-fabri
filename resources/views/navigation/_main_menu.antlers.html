@@ -1,17 +1,17 @@
 {{#
-    @name Mainmenu 
+    @name Mainmenu
     @desc The main menu. It's 2 levels deep by default and uses AlpineJS for interactivity.
 #}}
 
 <!-- /navigation/_main_menu.antlers.html -->
 
-<ul class="flex flex-col 
+<ul class="flex flex-col
     group
 ">
-    {{ nav:main 
-        max_depth="2" 
-        include_home="true" 
-        select="title|url" 
+    {{ nav:main
+        max_depth="2"
+        include_home="true"
+        select="title|url"
     }}
         <li
             {{ if children }}
@@ -22,12 +22,12 @@
             ml-[50%] md:ml-[68%] lg:ml-0"
         >
             <a
-                class="w-full 
-                    py-0 
-                    flex 
-                    items-center 
-                    space-x-1 
-                    {{ link_color }} 
+                class="w-full
+                    py-0
+                    flex
+                    items-center
+                    space-x-1
+                    {{ link_color }}
                     text-4xl lg:text-6xl 2xl:text-8xl
                     focus:outline-none focus-visible:ring-2 ring-primary"
                 {{ if children }}
@@ -42,7 +42,7 @@
                     href="{{ url }}"
                 {{ /if }}
             >
-                <span>{{ title }}</span>
+                <span class="font-bold">{{ title }}</span>
                 {{ if children }}
                     <div :class="{ 'scale-y-[-1]': subnavOpen }" class="motion-safe:transition-transform">
                         {{ svg:chevron_down class="w-2 ml-1 overflow-visible stroke-current text-neutral" aria-hidden="true" }}

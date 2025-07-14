@@ -33,7 +33,7 @@
     .mainmenu.visible .navigation-bottom { animation-delay: 1.5s }
 
     .mainmenu .mainmenu-blurb a {
-        @apply text-primary;
+        @apply text-secondary;
     }
     .mainmenu .mainmenu-blurb a:hover {
         @apply text-white;
