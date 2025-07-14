@@ -1,0 +1,20 @@
+{{#
+    @name Footer
+    @desc The sites footer rendered on each page.
+#}}
+
+<!-- /layout/_footer.antlers.html -->
+<footer class="w-full py-0 mt-auto">
+    {{# Let's users reset consent when you use the consent banner. #}}
+    {{ yield:reset_consent }}
+    {{ if footer}}
+        {{ footer}}
+            {{ partial:page_builder/section
+                section_gap="6"
+                vertical_padding="8"
+                section_slug="footer"
+            }}
+        {{/footer}}
+    {{ /if }}
+</footer>
+<!-- End: /layout/_footer.antlers.html -->

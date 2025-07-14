@@ -1,0 +1,74 @@
+title: Video
+fields:
+  -
+    handle: video_type
+    field:
+      options:
+        embed: Embed
+        file: File
+      default: embed
+      type: button_group
+      display: Type
+  -
+    handle: video_file
+    field:
+      max_files: 1
+      container: files
+      type: assets
+      display: File
+      width: 50
+      always_save: true
+      if:
+        video_type: 'equals file'
+  -
+    handle: video_url
+    field:
+      placeholder: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      input_type: url
+      type: text
+      localizable: true
+      width: 50
+      display: Video
+      instructions: 'YouTube or Vimeo URL.'
+      instructions_position: below
+      always_save: true
+      if:
+        video_type: 'equals embed'
+  -
+    handle: ratio_width
+    field:
+      default: '16'
+      type: integer
+      display: 'Ratio: Width'
+      width: 25
+  -
+    handle: ratio_height
+    field:
+      default: '9'
+      type: integer
+      display: 'Ratio: Height'
+      width: 25
+  -
+    handle: video_autoplay
+    field:
+      type: toggle
+      display: Autoplay
+      width: 33
+  -
+    handle: video_loop
+    field:
+      type: toggle
+      display: Loop
+      width: 33
+  -
+    handle: show_mute_button
+    field:
+      type: toggle
+      display: 'Show mute/unmute button'
+      width: 33
+  -
+    handle: caption
+    field:
+      type: text
+      localizable: true
+      display: Caption

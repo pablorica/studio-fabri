@@ -1,0 +1,27 @@
+{{#
+    @name Separator
+    @desc The separator component with a `height` attribute.
+#}}
+
+<!-- /components/_separator.antlers.html -->
+{{ if desktop_height }}
+    {{ if !mobile_height }}
+        {{  mobile_height = desktop_height }}
+    {{ /if }}
+{{ else }}
+    {{ if mobile_height }}
+        {{ desktop_height = mobile_height }}
+    {{ else }}
+        {{ mobile_height = 30 }}
+        {{ desktop_height = 100 }}
+    {{ /if }}
+{{ /if }}
+
+
+<div class="w-full md:hidden"
+    style="height:{{ mobile_height }}px"
+></div>
+<div class="w-full hidden md:block"
+    style="height:{{ desktop_height }}px"
+></div>
+<!-- End: /components/_separator.antlers.html -->

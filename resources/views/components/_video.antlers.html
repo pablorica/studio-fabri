@@ -1,0 +1,76 @@
+{{#
+    @name Video
+    @desc The video component. A sizeable YouTube or Vimeo video rendered in a responsive container with an optional caption.
+    @params video_type  embed | file
+    @params video_id
+    @params video_url
+    @params video_file
+    @params ratio_width
+    @params ratio_height
+    @params video_autoplay
+    @params video_loop
+    @params show_mute_button
+    @params video_caption
+    @params is_background_video
+    @params wrapper_class
+    @set page.article.video
+#}}
+
+<!-- /components/_video.antlers.html -->
+{{ if is_background_video }}
+  {{ if video_url | is_embeddable
+    || video_url | contains('bilibili')
+  }}
+    {{  partial:components/video_embed
+      :video_id="video_id"
+      :current_video_url="video_url"
+      :wrapper_class="wrapper_class"
+      video_autoplay="1"
+      video_loop="1"
+      video_muted="1"
+      is_background_video="1"
+    }}
+  {{ else }}
+  <div class="{{ wrapper_class }}">
+      <video id="{{ video_id }}"
+        src="{{ video_url }}"
+        autoplay muted loop playsinline
+        class="{{video_class}}"
+      ></video>
+    </div>
+    {{ /if }}
+{{ else }}
+
+  {{ if video_autoplay }}
+    {{ video_muted = true }}
+  {{ /if }}
+
+  {{ if video_type == 'embed' }}
+      <!-- Youtube and Vimeo -->
+      {{  partial:components/video_embed
+          :video_id="video_id"
+          :current_video_url="video_url"
+          :video_autoplay="video_autoplay"
+          :video_loop="video_loop"
+          :video_muted="video_muted"
+          :video_show_mute_button="show_mute_button"
+          :video_caption="video_caption"
+          :ratio_width="ratio_width"
+          :ratio_height="ratio_height"
+      }}
+  {{ /if }}
+  {{ if video_type == 'file' }}
+      <!-- Other HTML5 video types -->
+      <video id="{{ video_id }}"
+        src="{{ video_file }}"
+        controls
+        playsinline
+        {{ if video_autoplay }}autoplay {{ /if }}
+        {{ if video_loop }}loop {{ /if }}
+        {{ if video_muted }}muted {{ /if }}
+      ></video>
+  {{ /if }}
+
+{{ /if }}
+
+<!-- End: /components/_video.antlers.html -->

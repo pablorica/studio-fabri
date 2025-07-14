@@ -1,0 +1,10 @@
+title: 'Related Entry'
+fields:
+  -
+    handle: entry
+    field:
+      collections:
+        - projects
+      type: entries
+      display: 'Related Entry'
+      max_items: 1

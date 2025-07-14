@@ -1,0 +1,342 @@
+{{#
+    @name Video
+    @desc The video component. A sizeable YouTube or Vimeo video rendered in a responsive container with an optional caption.
+    @params video_id
+    @params video_url
+    @params ratio_width
+    @params ratio_height
+    @params video_autoplay
+    @params video_loop
+    @params video_show_mute_button
+    @params video_caption
+    @params wrapper_class
+    @set page.article.video_embed
+#}}
+
+<!-- /components/_video_embed.antlers.html -->
+
+{{# We are using a new variable 'current_video_url' to save the original video_url value because this code is iterating over references to video_url (it's changing its value globally). #}}
+
+
+
+{{ url_union = '?' }}
+{{ if current_video_url | contains('?') }}
+    {{ url_union = '&' }}
+{{ /if }}
+
+{{ if current_video_url | is_vimeo }}
+    {{ current_video_url .= '{url_union}loop={video_loop}'}}
+    {{ if video_autoplay }}
+        {{ current_video_url .= '&autoplay={video_autoplay}&muted=1&autopause=0&hidecontrols=1&background=1'}}
+    {{ /if }}
+{{ /if }}
+
+
+{{ show_mute_button = false }}
+{{ if video_show_mute_button }}
+  {{ show_mute_button = video_show_mute_button }}
+{{ /if }}
+
+
+
+
+{{ if !show_mute_button }} {{# We do not need to load the Youtube API, so we can manage the video options via URL #}}
+    {{ if current_video_url | is_youtube:id }}
+    {{  url_union = '?' }}
+        {{  if video_loop}}
+            {{ current_video_url .= '?loop={video_loop}&playlist={current_video_url | is_youtube:id}' }}
+            {{ url_union = '&' }}
+        {{ /if }}
+        {{ if video_autoplay }}
+            {{ current_video_url .= '{url_union}autoplay={video_autoplay}&mute=1&controls=0' }}
+        {{ /if }}
+    {{ /if }}
+{{ /if }}
+
+
+{{ video_sound = 1 }}
+{{ if current_video_url | contains('mute') }}
+    {{ video_sound = 0 }}
+{{ /if }}
+
+{{ calculated_class =  '' }}
+{{ calculated_style =  '' }}
+  {{ if ratio_width && ratio_height }}
+      {{ calculated_padding =  "padding-bottom: "+(ratio_height*100/ratio_width)+"%;"; }}
+      {{ calculated_aspect-ratio =  "aspect-ratio: "+ratio_width+" / "+ratio_height+";";  }}
+      {{ calculated_style =  'style = "'+calculated_padding + ' ' + calculated_aspect-ratio+'"'; }}
+  {{ /if }}
+
+  {{ if is_background_video }}
+    {{ calculated_class = "w-full pb-screen
+      md:pb-[calc(2*100%/3)]
+      md:absolute md:top-1/2 md:left-1/2
+      md:translate-y-[-50%] md:translate-x-[-50%]" }}
+  {{ /if }}
+
+
+{{ partial:components/consent_gate
+  :wrapper_class="wrapper_class"
+  :calculated_style="calculated_style"
+  :calculated_class="calculated_class"
+}}
+
+
+        {{# YOUTUBE #}}
+
+        {{# if current_video_url | is_youtube:id && show_mute_button #}}
+        {{ if current_video_url | is_youtube:id  }}
+          {{ if show_mute_button || is_background_video }}
+            <div id="video_{{ current_video_url | get_video_id }}"></div>
+         {{ else }}
+            <iframe title="YouTube video player"
+              src="{{ current_video_url | embed_url }}"
+              width="100%"
+              height="auto"
+              class="absolute
+                top-1/2 left-1/2
+                translate-y-[-50%] translate-x-[-50%]
+                w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          {{ /if }}
+        {{ elseif current_video_url | is_vimeo }}
+
+        {{# VIMEO #}}
+
+        {{# Note:
+        Originally it was
+            src="{ current_video_url | embed_url }"
+        but the modifier is no working well with Vimeo
+        #}}
+        <iframe id="video_{{ current_video_url | get_video_id }}"
+            src="https://player.vimeo.com/video/{{ current_video_url | get_video_id }}?{{ current_video_url | get_url_query_string }}"
+            class="absolute
+            top-1/2 left-1/2
+            translate-y-[-50%] translate-x-[-50%]
+            w-[10000px] h-full"
+            width="100%"
+            height="auto"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+        {{ else }}
+
+          {{# OTHER VIDEO PLATFORMS #}}
+
+          <iframe src="{{ current_video_url }}"
+            class="absolute
+            top-1/2 left-1/2
+            translate-y-[-50%] translate-x-[-50%]
+            w-[10000px] h-full"
+            width="100%"
+            height="auto"
+            scrolling="no"
+            border="0"
+            frameborder="no"
+            framespacing="0"
+            allowfullscreen="true"
+          ></iframe>
+        {{ /if }}
+
+        {{ if show_mute_button }}
+            <span id="mute_{{ current_video_url | get_video_id }}"
+                x-data="{ video_muted: {{ video_sound }} }"
+                @click="video_muted = ! video_muted"
+                class="absolute bottom-[10px] right-[10px] z-20 cursor-pointer w-[36px] h-[32px]"
+            >
+            {{# For some reason, Vimeo is working reversed, so we need to show the opposite icon #}}
+                <span x-show="video_muted">
+                    {{ if current_video_url | is_vimeo }}
+                        {{  partial:icons/unmuted
+                            svg_class="fill-white absolute w-[36px] h-auto"
+                        }}
+                    {{ else }}
+                        {{  partial:icons/muted
+                            svg_class="fill-white absolute w-[36px] h-auto"
+                        }}
+                    {{ /if }}
+                </span>
+
+                <span x-show="!video_muted">
+                    {{ if current_video_url | is_vimeo }}
+                        {{  partial:icons/muted
+                            svg_class="fill-white absolute w-[36px] h-auto"
+                        }}
+                    {{ else }}
+                        {{  partial:icons/unmuted
+                            svg_class="fill-white absolute w-[36px] h-auto"
+                        }}
+                    {{ /if }}
+                </span>
+
+            </span>
+        {{ /if }}
+{{ /partial:components/consent_gate }}
+
+    {{ slot:append }}
+        {{ partial:typography/caption }}
+    {{ /slot:append }}
+
+
+
+  {{# We need each platform API to create custom buttons #}}
+  {{ if show_mute_button || is_background_video }}
+    {{ if current_video_url | is_vimeo }}
+      <script src="https://player.vimeo.com/api/player.js"></script>
+      <script>
+          var mute_{{ current_video_url | get_video_id }}  = document.querySelector('#mute_{{ current_video_url | get_video_id }}')
+          var video_{{ current_video_url | get_video_id }} = document.querySelector('#video_{{ current_video_url | get_video_id }}')
+          var player_{{ current_video_url | get_video_id }} = new Vimeo.Player(video_{{ current_video_url | get_video_id }});
+
+          mute_{{ current_video_url | get_video_id }}.addEventListener(
+              'click',
+              function() {
+                  //console.log('mute clicked, typeof video.muted='+ typeof video_{{ current_video_url | get_video_id }}.muted);
+
+                  if(typeof video_{{ current_video_url | get_video_id }}.muted == 'undefined') {
+                      //console.log('undefined, setting mute video to {{ video_sound }}');
+                      video_{{ current_video_url | get_video_id }}.muted = {{ video_sound }};
+                      player_{{ current_video_url | get_video_id }}.setMuted({{ video_sound }});
+                  } else {
+                      video_{{ current_video_url | get_video_id }}.muted = !video_{{ current_video_url | get_video_id }}.muted;
+                      player_{{ current_video_url | get_video_id }}.setMuted(video_{{ current_video_url | get_video_id }}.muted);
+                  }
+              }
+          );
+      </script>
+    {{ /if }}
+
+    {{ if current_video_url | is_youtube }}
+      <style>
+          iframe#video_{{ current_video_url | get_video_id }} {
+              position: absolute;
+              top:50%;
+              left:50%;
+              transform: translate(-50%, -50%);
+              width: 10000px;
+              height: 100%;
+          }
+      </style>
+      <script>
+          // @see https://developers.google.com/youtube/iframe_api_reference
+
+          var youScript = 'youScript';  // Load Youtube remote scripts  and API functions only once.
+          if (!document.getElementById(youScript)) {
+
+              var player;
+              function onYouTubeIframeAPIReady() {
+                  player = new YT.Player('existing-iframe-example', {
+                      events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange
+                      }
+                  });
+              }
+
+
+
+              var tag = document.createElement('script');
+
+              tag.src = "https://www.youtube.com/iframe_api";
+              tag.id   = youScript;
+
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+              // @see https://www.w3schools.com/js/js_scope.asp
+              var players = {};
+              var playerSettings = {};
+
+              /**
+              * This function creates the <iframe> (and YouTube players) of this page
+              * after the API code downloads.
+              */
+              function onYouTubeIframeAPIReady() {
+
+                  //console.log('loading players');
+                  for (const [key, value] of Object.entries(this.playerSettings)) {
+                      //console.log(`${key}: ${value}`);
+                      launchPlayer(key, value);
+                  }
+
+                  function launchPlayer(key, item) {
+                      this.players[key] = new YT.Player(
+                          item.iframeid,
+                          {
+                              height: '100%',
+                              width: '100%',
+                              videoId: item.videoid,
+                              playerVars: item.playerVars,
+                              events: {
+                                  //'onReady': onPlayerReady,
+                                  //'onStateChange': onPlayerStateChange
+                              }
+                          }
+                      );
+                  }
+              }
+
+
+              function onPlayerReady() {
+                  console.log("hey Im ready");
+                  //console.log(this.players);
+              }
+
+              function onPlayerStateChange() {
+                  console.log("my state changed");
+              }
+
+              this.muteVideo = function(evt) {
+                  //console.log('mute clicked ');
+                  //console.log(this.players[evt.currentTarget.key]);
+
+                  if (this.players[evt.currentTarget.key].isMuted()) {
+                      this.players[evt.currentTarget.key].unMute();
+                      //console.log('video: '+ evt.currentTarget.key +' muted= false');
+                  } else {
+                      this.players[evt.currentTarget.key].mute();
+                      //console.log('video: '+ evt.currentTarget.key +' muted= true');
+                  }
+              };
+          }
+
+          this.playerSettings.player_{{ current_video_url | get_video_id }} = {
+              'id':           'player_{{ current_video_url | get_video_id }}',
+              'iframeid':     'video_{{ current_video_url | get_video_id }}',
+              'videoid':      '{{ current_video_url | get_video_id }}',
+              'playerVars':   {
+                  'playsinline': 1,
+
+                  {{ if video_loop}}
+                      'loop': 1,
+                      'playlist': '{{ current_video_url | get_video_id }}',
+                  {{ /if }}
+                  {{ if video_autoplay }}
+                      'mute': 1,
+                      'autoplay': 1,
+                      'controls': 0,
+                  {{ /if }}
+              },
+          };
+
+          var mute_{{ current_video_url | get_video_id }}  = document.querySelector('#mute_{{ current_video_url | get_video_id }}')
+
+          // @see https://stackoverflow.com/questions/1338599/the-value-of-this-within-the-handler-using-addeventlistener
+          mute_{{ current_video_url | get_video_id }}.addEventListener(
+              'click',
+              this.muteVideo.bind(this),
+          );
+
+          // @see https://stackoverflow.com/questions/256754/how-to-pass-arguments-to-addeventlistener-listener-function
+          mute_{{ current_video_url | get_video_id }}.key = 'player_{{ current_video_url | get_video_id }}';
+
+      </script>
+    {{ /if }}
+  {{ /if }}
+
+
+<!-- End: /components/_video_embed.antlers.html -->

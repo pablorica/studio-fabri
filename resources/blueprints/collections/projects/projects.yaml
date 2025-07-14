@@ -1,0 +1,137 @@
+title: Projects
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: General
+        fields:
+          -
+            handle: title
+            field:
+              type: textarea
+              required: true
+              display: Title
+              validate:
+                - required
+              width: 75
+          -
+            handle: top_title_colour
+            field: common.colour
+            config:
+              display: 'Top Title Colour'
+              width: 25
+              default: white
+          -
+            handle: subtitle
+            field: common.text_plain
+            config:
+              display: Subtitle
+      -
+        display: 'Page builder'
+        fields:
+          -
+            import: page_builder
+  seo:
+    display: SEO
+    sections:
+      -
+        display: Basic
+        instructions: 'Basic SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_basic'
+      -
+        display: Advanced
+        instructions: 'Advanced SEO settings.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_advanced'
+      -
+        display: 'Open Graph'
+        instructions: 'Open Graph meta tags for social sharing.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_open_graph'
+      -
+        display: Sitemap
+        instructions: 'Sitemap configuration.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_sitemap'
+      -
+        display: 'JSON-ld Schema'
+        instructions: 'Custom JSON-ld schema objects.'
+        fields:
+          -
+            import: 'statamic-peak-seo::seo_jsonld'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        display: Meta
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate:
+                - required
+              display: Slug
+          -
+            handle: date
+            field:
+              type: date
+              default: now
+              listable: true
+              validate:
+                - required
+              display: Date
+              time_required: false
+              earliest_date: '2021-01-01'
+          -
+            handle: image
+            field: common.image
+            config:
+              mode: grid
+              listable: true
+              width: 100
+              validate:
+                - required
+          -
+            handle: locations
+            field:
+              type: terms
+              taxonomies:
+                - locations
+              display: Locations
+              mode: select
+              max_items: 1
+          -
+            handle: location_area
+            field:
+              type: text
+              display: Area
+          -
+            handle: client
+            field:
+              type: text
+              display: Client
+          -
+            handle: sectors
+            field:
+              type: terms
+              taxonomies:
+                - sectors
+              display: Sectors
+              mode: select
+              max_items: 1
+          -
+            handle: project_date
+            field:
+              type: text
+              display: 'Project Date'
+          -
+            import: related_entry
+            prefix: bottom_

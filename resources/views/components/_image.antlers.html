@@ -1,0 +1,126 @@
+{{#
+    @name Image
+    @desc The image component. A sizeable image rendered in a figure tag with optional caption.
+    @figure figure_class    Additional figure classes
+    @param size             md | lg | xl
+    @param image            url of the file
+    @param img_id           id of the image
+    @param image_link       url of the link
+    @param target           the target of the link
+    @param img_class        additional iamge classes
+    @param ratio            default| 3/2 | 4/3 | 16/9 | 8/9  Pass in an aspect ratio to crop the image in a certain way. `16/9` for example or specify a second ratio for larger screens: `1/1 large:1/2`.
+    @param srcset_from The path to a partial with an alternative srcset definition array. Something like `snippets/srcset_full_width` for example.
+    @set page.article.image
+#}}
+
+<!-- /components/_image.antlers.html -->
+
+
+{{ image_original_class = ''}}
+{{ fig_class            = figure_class }}
+
+{{ image_glide = null }}
+{{ if image }}
+    {{ image_glide = image  }}
+{{ /if }}
+
+
+{{# ratio | dump #}}
+{{ if ratio && ratio  != 'default' }}
+    {{# aspect-[3/2] aspect-[4/3] aspect-[16/9] aspect-[8/9] #}}
+    {{ fig_class            .= ' aspect-[' +ratio+ '] relative' }}
+    {{ image_original_class .= ' absolute object-cover w-full h-full object-center' }}
+    {{ image_ratio           = ratio }}
+{{ /if }}
+
+{{# image_ratio | dump #}}
+
+<figure
+    id="{{ img_id }}"
+    class="{{ fig_class }}
+        {{ switch(
+            (size == 'md') => 'size-md',
+            (size == 'lg') => 'size-lg',
+            (size == 'xl') => 'size-xl',
+            () => 'col-span-full'
+        )}}
+    "
+>
+{{ if image_link }}
+        <a href="{{ image_link }}"
+            target="{{ target ?? '_self' }}"
+        >
+{{ /if }}
+
+{{ image_class = img_class }}
+
+{{ if size == 'full' }}
+    {{ image_class .= ' w-full' }}
+{{ /if }}
+
+        {{ if glide:enabled }}
+
+          {{# image_ratio | dump  #}}
+          {{ if image_ratio.value }}
+            {{# image_ratio.value | dump  #}}
+            {{ ratio_value = image_ratio.value  }}
+          {{ else }}
+            {{ ratio_value = image_ratio }}
+          {{ /if }}
+          {{  unless ratio_value | fraction_to_decimal | is_numeric }}
+            {{ ratio_value = '' }}
+          {{ /unless }}
+         {{# ratio_value | dump  #}}
+
+
+          {{# srcset_from="snippets/srcset_full_width" #}}
+          {{# vendor/studio1902/statamic-peak-tools/resources/views/components/_picture.antlers.html #}}
+          {{
+              partial:statamic-peak-tools::components/picture
+              :image="image_glide"
+              :class="image_class"
+              :aspect_ratio="ratio_value"
+              cover="false"
+              lazy="true"
+              sizes="
+                  {{ switch(
+                      (size == 'md') => '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw',
+                      (size == 'lg') => '(min-width: 1280px) 960px, (min-width: 768px) 75vw, 90vw',
+                      (size == 'xl') => '(min-width: 1280px) 1150px, 90vw',
+                      () => '100vw'
+                  )}}
+              "
+              quality="{ size == 'full' ? '100': '85' }"
+          }}
+
+          {{ image_ratio = ''}}
+          {{ image_class = ''}}
+          {{ ratio_value = ''}}
+
+
+
+        {{ else }}
+
+            {{ image_class .= image_original_class }}
+            {{ asset :url="image" }}
+                <img
+                    class="{{ image_class }}"
+                    src="{{ url }}"
+                    alt="{{ alt | ensure_right('.') | entities }}"
+                    width="{{ width }}"
+                    height="{{ height }}"
+                    {{ unless alt }}
+                        aria-hidden="true"
+                    {{ /unless }}
+                    loading="lazy"
+                />
+            {{ /asset }}
+        {{ /if }}
+
+    {{ partial:typography/caption as="figcaption" class="max-w-[165px]" }}
+
+{{ if image_link }}
+    </a>
+{{ /if }}
+</figure>
+<!-- End: /components/_image.antlers.html -->

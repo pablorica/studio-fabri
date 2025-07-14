@@ -1,0 +1,95 @@
+title: Carousel
+fields:
+  -
+    handle: carousel
+    field:
+      collapse: false
+      previews: true
+      fullscreen: true
+      sets:
+        new_set_group:
+          display: 'New Set Group'
+          instructions: null
+          icon: null
+          sets:
+            slide:
+              display: 'New slide'
+              instructions: null
+              icon: null
+              fields:
+                -
+                  handle: image
+                  field: common.image
+                -
+                  handle: caption
+                  field: common.text_plain
+                  config:
+                    display: Caption
+      type: replicator
+      display: Carousel
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+  -
+    handle: navigation_arrows
+    field:
+      default: false
+      type: toggle
+      display: 'Navigation arrows'
+      width: 33
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+  -
+    handle: navigation
+    field:
+      default: false
+      type: toggle
+      display: 'Navigation buttons'
+      width: 33
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+      replicator_preview: true
+  -
+    handle: full_size
+    field:
+      default: false
+      type: toggle
+      display: 'Full size'
+      width: 33
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+      replicator_preview: true
+  -
+    handle: autoplay
+    field:
+      default: false
+      type: toggle
+      display: Autoplay
+      width: 33
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      hide_display: false
+      replicator_preview: true
+  -
+    handle: transition
+    field:
+      options:
+        carousel: Slide
+        gallery: Fade
+      default: carousel
+      type: button_group
+      display: Transition
+      width: 66
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
