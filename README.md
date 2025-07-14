@@ -1,12 +1,12 @@
 # TM  Studio
 
-A Statamic website for [TM — TsevdosMcNeil – Brand Consultancy](https://tm-studio.co.uk/) based in [Statamic Starter Kit](https://github.com/pablorica/statamic_starter_kit) 
+A Statamic website for [StudioFabri](https://studio-fabri.codigo.co.uk/) based in [Statamic Starter Kit](https://github.com/pablorica/statamic_starter_kit) 
 
-[![version](https://img.shields.io/badge/version-1.2.0-green.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-0.4.2-yellow.svg)](https://semver.org)
 
 ## Live site
 
-[TM Studio](https://tm-studio.co.uk/)
+Studio Fabri
 
 ## Installation instructions
 
