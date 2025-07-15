@@ -1,15 +1,1 @@
 title: 'Navigation Logos'
-data:
-  logos:
-    -
-      id: md46fmsn
-      image: logos/blue_triangle_logo.png
-      link_field: 'https://tm-studio.co.uk/'
-      type: logos
-      enabled: true
-    -
-      id: md47fkug
-      image: logos/green_hex_logo_larger_text.png
-      link_field: 'https://www.google.com/'
-      type: logos
-      enabled: true
