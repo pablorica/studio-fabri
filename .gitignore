@@ -169,8 +169,13 @@ resources/views/vendor/livewire/
 # track peak image, if it exists
 !public/images/a-peak.jpg
 
-
-
+# track these globals, if they exist
+!content/
+content/*
+!content/globals/
+content/globals/*
+content/globals/*.*
+!content/globals/navigation_logos.yaml
 
 
 
