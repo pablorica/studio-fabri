@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## 0.4.3 - 2025-07-15
+
+### Added
+
+ - Navigation Logos
+
+
+
 ## 0.4.2 - 2024-10-10
 
 ### Added
