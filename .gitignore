@@ -175,7 +175,7 @@ content/*
 !content/globals/
 content/globals/*
 content/globals/*.*
-!content/globals/navigation_logos.yaml
+##!content/globals/navigation_logos.yaml
 
 
 
